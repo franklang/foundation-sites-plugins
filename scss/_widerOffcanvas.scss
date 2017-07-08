@@ -1,3 +1,28 @@
-#offCanvasRight.is-open {
-  transform: translateX(0) !important;
+// 
+// foundation.widerOffcanvas.js plugin
+//
+// Extends "Foundation for Sites" v6.4.1 off-canvas plugin
+// to provide a wider than 250px-standard width off-canvas.
+//
+// [WARNING] Tested for right-positioned off-canvas only so far.
+//
+// Usage:
+//
+// - Make sure you have a DOM element which width points to the _settings.scss 
+//   "$global-width" variable value.
+//   Has to be an ID. Default: <div id="globalWidth"></div>.
+// - Replace "#offCanvasRight" ID with your own off-canvas element ID.
+//
+
+#globalWidth {
+  @include flex-grid-row(
+    $behavior: collapse);
+}
+
+#offCanvasRight {
+  width: 100%;
+  transform: translateX(100%);
+  &.is-open {
+    transform: translateX(0) !important;
+  }
 }
