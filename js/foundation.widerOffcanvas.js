@@ -52,10 +52,8 @@
      */
     function setWiderOffCanvasWidth() {
       var globalWidth = Foundation.Box.GetDimensions(document.getElementById(settings.globalWidth));
-      var pageSideMarginWidth = (globalWidth.parentDims.width - globalWidth.width)/2;
-      var baseWiderOffCanvasWidth = globalWidth.parentDims.width/settings.divider;
-      var widerOffCanvasWidth = pageSideMarginWidth + baseWiderOffCanvasWidth;
-      
+      var widerOffCanvasWidth = globalWidth.parentDims.width/settings.divider;
+
       $(settings.offCanvasID).css({
         'width': widerOffCanvasWidth,
         '-webkit-transform': 'translateX(' + widerOffCanvasWidth + 'px)',
@@ -69,13 +67,15 @@
      */
     function setPageIndentValue() {
       var globalWidth = Foundation.Box.GetDimensions(document.getElementById(settings.globalWidth));
-      var baseWiderOffCanvasWidth = globalWidth.parentDims.width/2.33333;
+      var pageSideMarginWidth = (globalWidth.parentDims.width - globalWidth.width)/2;
+      var widerOffCanvasWidth = globalWidth.parentDims.width/settings.divider;      
+      var pageIndentValue = widerOffCanvasWidth - pageSideMarginWidth;
       
       $(settings.offCanvasID).on('opened.zf.offcanvas', function() {
         $(settings.pageID).css({
-          '-webkit-transform': 'translateX(-' + baseWiderOffCanvasWidth + 'px)',
-          '-ms-transform': 'translateX(-' + baseWiderOffCanvasWidth + 'px)',
-          'transform': 'translateX(-' + baseWiderOffCanvasWidth + 'px)'
+          '-webkit-transform': 'translateX(-' + pageIndentValue + 'px)',
+          '-ms-transform': 'translateX(-' + pageIndentValue + 'px)',
+          'transform': 'translateX(-' + pageIndentValue + 'px)'
         });
       }).on('closed.zf.offcanvas', function() {
         $(settings.pageID).attr('style', ' ');
@@ -97,8 +97,6 @@
     $(window).on('resize', function() {
       destroyWiderOffCanvas();
       $(settings.offCanvasID).foundation('close');
-
-      var globalWidth = Foundation.Box.GetDimensions(document.getElementById(settings.globalWidth));
 
       if (Foundation.MediaQuery.atLeast(settings.triggeringBreakpoint)) {
         setWiderOffCanvasWidth();
