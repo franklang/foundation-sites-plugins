@@ -41,13 +41,6 @@
     var settings = $.extend({}, defaults, options);
 
     /**
-     * Destroy function (more of a DOM reset actually...)
-     */
-    function destroyWiderOffCanvas() {
-      $(settings.offCanvasID, settings.pageID).attr('style', '');
-    }
-
-    /**
      * Set wider off-canvas specific width
      */
     function setWiderOffCanvasWidth() {
@@ -95,9 +88,6 @@
      * On window resize...
      */
     $(window).on('resize', function() {
-      destroyWiderOffCanvas();
-      $(settings.offCanvasID).foundation('close');
-
       if (Foundation.MediaQuery.atLeast(settings.triggeringBreakpoint)) {
         setWiderOffCanvasWidth();
         setPageIndentValue(); 
